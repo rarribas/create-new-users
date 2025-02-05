@@ -4,6 +4,7 @@ import Input from './components/Input';
 import { useState } from 'react';
 function App() {
 
+  // TODO: Add 3 more users here
   const [usersList, setUsersList] = useState([{
     name: 'Raul Arribas',
     job: "Frontend Developer",
@@ -38,6 +39,7 @@ function App() {
     })
   }
 
+  // TODO: Stye and clean up HTML
   return (
     <>
         <div>

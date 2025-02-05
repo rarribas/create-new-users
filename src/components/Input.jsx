@@ -1,4 +1,5 @@
 import { useState } from "react"
+// eslint-disable-next-line react/prop-types
 export default function Input({type, name, text}) {
   const [value, setValue] = useState("");
   
