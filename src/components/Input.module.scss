@@ -1,4 +1,6 @@
 .form-control {
+  display: flex;
+  flex-direction: column;
   font-family: 'Open Sans', sans-serif;
   margin-bottom: 8px;
 
@@ -8,7 +10,6 @@
   }
 
   label{
-    display: block;
     font-size: 12px;
     font-weight: 600;
   }
