@@ -1,5 +1,5 @@
 import './App.css'
-import Button from './components/Button';
+import Form from './components/Form';
 import Input from './components/Input';
 import { useState } from 'react';
 function App() {
@@ -39,7 +39,6 @@ function App() {
     })
   }
 
-  // TODO: Stye and clean up HTML
   return (
     <>
       <header>
@@ -47,7 +46,7 @@ function App() {
       </header>
       <section>
         <div>
-          <form onSubmit={onFormSubmit}>
+          <Form onFormSubmit={onFormSubmit}>
             <div>
               <Input text="Name" name="name" type="text"/>
               <Input text="Job" name="job" type="text"/>
@@ -55,10 +54,7 @@ function App() {
               <Input text="Age" name="age" type="number"/>
               <Input text="Net Worth" name="net_worth" type="number"/>
             </div>
-            <div>
-              <Button text="Submit" type="submit"/>
-            </div>
-          </form>
+          </Form>
         </div>
         <div>
           <ul>{getListOfUsers()}</ul>
