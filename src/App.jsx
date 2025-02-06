@@ -42,24 +42,29 @@ function App() {
   // TODO: Stye and clean up HTML
   return (
     <>
-        <div>
+      <header>
         <h1>Create New Users</h1>
-        <form onSubmit={onFormSubmit}>
-          <div>
-            <Input text="Name" name="name" type="text"/>
-            <Input text="Job" name="job" type="text"/>
-            <Input text="Country" name="country" type="text"/>
-            <Input text="Age" name="age" type="number"/>
-            <Input text="Net Worth" name="net_worth" type="number"/>
-          </div>
-          <div>
-            <Button text="Submit" type="submit"/>
-          </div>
-        </form>
-      </div>
-      <div>
-        <ul>{getListOfUsers()}</ul>
-      </div>
+      </header>
+      <section>
+        <div>
+          <form onSubmit={onFormSubmit}>
+            <div>
+              <Input text="Name" name="name" type="text"/>
+              <Input text="Job" name="job" type="text"/>
+              <Input text="Country" name="country" type="text"/>
+              <Input text="Age" name="age" type="number"/>
+              <Input text="Net Worth" name="net_worth" type="number"/>
+            </div>
+            <div>
+              <Button text="Submit" type="submit"/>
+            </div>
+          </form>
+        </div>
+        <div>
+          <ul>{getListOfUsers()}</ul>
+        </div>  
+      </section>
+      
     </>
     
   )

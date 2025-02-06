@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+h1, p{
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1{
+  text-align: center;
+}
+
+p{
+  color: #1e1e1e;
+  font-size: 12px;
+}
+
+h4 {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  list-style: none;
+}
+
+section{
+  display: flex;
+}
