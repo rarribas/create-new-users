@@ -34,7 +34,8 @@ function App() {
   const getListOfUsers = () =>{
     return usersList.map((user)=>{
       return <li key={user.name}>
-        <h4>{user.name}</h4>
+        <h4>{`${user.name} - ${user.country}`}</h4>
+        <p><span>Age:</span>{user.age} / <span>Job:</span>{user.job} / <span>Net Worth:</span>{user.net_worth}</p>
       </li>
     })
   }
