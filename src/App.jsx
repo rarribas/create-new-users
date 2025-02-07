@@ -6,9 +6,8 @@ import {users} from './data/users';
 import { useState } from 'react';
 function App() {
 
-  // TODO: Add 3 more users here
   const [usersData, setUsersData] = useState(users);
-
+  
   const onFormSubmit = (ev) => {
     ev.preventDefault();
     ev.stopPropagation();
