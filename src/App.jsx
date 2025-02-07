@@ -1,17 +1,13 @@
 import './App.css'
 import Form from './components/Form';
 import Input from './components/Input';
+import UserList from './components/UserList';
+import {users} from './data/users';
 import { useState } from 'react';
 function App() {
 
   // TODO: Add 3 more users here
-  const [usersList, setUsersList] = useState([{
-    name: 'Raul Arribas',
-    job: "Frontend Developer",
-    country: "Spain",
-    age: "40",
-    net_worth: "1200"
-  }]);
+  const [usersData, setUsersData] = useState(users);
 
   const onFormSubmit = (ev) => {
     ev.preventDefault();
@@ -25,20 +21,11 @@ function App() {
       net_worth: ev.target.elements.net_worth.value
     };
 
-    setUsersList([
-      ...usersList,
+    setUsersData([
+      ...usersData,
       userItem
     ])
   };
-
-  const getListOfUsers = () =>{
-    return usersList.map((user)=>{
-      return <li key={user.name}>
-        <h4>{`${user.name} - ${user.country}`}</h4>
-        <p><span>Age:</span>{user.age} / <span>Job:</span>{user.job} / <span>Net Worth:</span>{user.net_worth}</p>
-      </li>
-    })
-  }
 
   return (
     <>
@@ -58,7 +45,7 @@ function App() {
           </Form>
         </div>
         <div>
-          <ul>{getListOfUsers()}</ul>
+          <UserList usersData={usersData}/>
         </div>  
       </section>
       
