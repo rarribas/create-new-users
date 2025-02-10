@@ -1,7 +1,7 @@
 import './App.css'
 import Form from './components/Form';
 import Input from './components/Input';
-import UserList from './components/UserList';
+import UserList from './components/List';
 import {users} from './data/users';
 import { useState } from 'react';
 function App() {
