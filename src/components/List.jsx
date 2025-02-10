@@ -1,14 +1,14 @@
 import styles from './List.module.scss';
 import User from './User';
 /* eslint-disable react/prop-types */
-export default function UserList({usersData}){
-  const getListOfUsers = () =>{
-    return usersData.map((user)=>{
-      return <li key={user.name}>
-        <User user={user}/>
+export default function List({listData}){
+  const getListItems = () =>{
+    return listData.map((listItem)=>{
+      return <li key={listItem.name}>
+        <User user={listItem}/>
       </li>
     })
   }
 
-  return <ul className={styles['list']}>{getListOfUsers()}</ul>
+  return <ul className={styles['list']}>{getListItems()}</ul>
 }
