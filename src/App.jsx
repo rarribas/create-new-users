@@ -44,7 +44,7 @@ function App() {
           </Form>
         </div>
         <div>
-          <UserList usersData={usersData}/>
+          <UserList listData={usersData}/>
         </div>  
       </section>
       
