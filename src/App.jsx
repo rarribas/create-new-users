@@ -2,15 +2,71 @@ import './App.css'
 import Form from './components/Form';
 import Input from './components/Input';
 import UserList from './components/List';
+import FormMessage from './components/FormMessage';
 import {users} from './data/users';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 function App() {
-
   const [usersData, setUsersData] = useState(users);
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [formError, setFormError] = useState(null);
+
+  useEffect(() => {
+    if(submitStatus === "success"){
+      console.log("HERE???");
+      const timer = setTimeout(() => setSubmitStatus(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  },[submitStatus]);
+
+  const inputElements = [{
+    name: "name",
+    type: "text",
+    text: "Name",
+  },{
+    name: "job",
+    type: "text",
+    text: "Job",
+  },{
+    name: "country",
+    type: "text",
+    text: "Country",
+  },{
+    name: "age",
+    type: "number",
+    text: "Age",
+  },{
+    name: "net_worth",
+    type: "number",
+    text: "Net Worth",
+  }];
   
+  const getSuccessMessage = () => {
+    return <FormMessage  message="Success! New User Added"/>
+  };
+
+  const getErrorMessage = () => {
+    return <FormMessage  message={formError}/>
+  };
+
+  const getEmptyValues = (formElements) => {
+    
+    const formElementsArray = Array.from(formElements); // Convert HTMLFormControlsCollection to an array
+
+    return formElementsArray.filter((element) => element.name && element.value.trim() === '')
+      .map((element) => element.name);
+  }
+
   const onFormSubmit = (ev) => {
     ev.preventDefault();
     ev.stopPropagation();
+
+    const emptyElements = getEmptyValues(ev.target.elements); 
+
+    if(emptyElements.length > 0){
+      setFormError(`Elements ${emptyElements.join(', ')} cannot be empty`);
+      setSubmitStatus("error")
+      return;
+    } 
 
     const userItem = {
       name: ev.target.elements.name.value,
@@ -24,6 +80,9 @@ function App() {
       ...usersData,
       userItem
     ])
+
+    setFormError(null);
+    setSubmitStatus("success");
   };
 
   return (
@@ -35,13 +94,13 @@ function App() {
         <div>
           <Form onFormSubmit={onFormSubmit}>
             <div>
-              <Input text="Name" name="name" type="text"/>
-              <Input text="Job" name="job" type="text"/>
-              <Input text="Country" name="country" type="text"/>
-              <Input text="Age" name="age" type="number"/>
-              <Input text="Net Worth" name="net_worth" type="number"/>
+              {inputElements.map((input) =>{
+                return <Input  key={input.name} text={input.text} name={input.name} type={input.type} inputValue=""/>
+              })}
             </div>
           </Form>
+          {submitStatus === 'success' && getSuccessMessage()}
+          {submitStatus === 'error' && getErrorMessage()}
         </div>
         <div>
           <UserList listData={usersData}/>
