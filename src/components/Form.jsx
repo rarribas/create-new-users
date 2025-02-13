@@ -8,7 +8,7 @@ const Form = forwardRef(({ onFormSubmit, children }, ref) => {
 
   const afterSubmit = (ev) => {
     ev.preventDefault();
-    onFormSubmit(); 
+    onFormSubmit(ev); 
     setIsSaving(false);
   };
 

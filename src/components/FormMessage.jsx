@@ -1,4 +1,5 @@
 // eslint-disable-next-line react/prop-types
-export default function FormMessage({message}) {
-  return <p>{message}</p>
+import styles from "./FormMessage.module.scss";
+export default function FormMessage({message, variant = "success"}) {
+  return <p className={styles['form-message']} data-variant={variant}>{message}</p>
 }

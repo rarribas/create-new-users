@@ -57,8 +57,8 @@ function App() {
       .map((element) => element.name);
   }
 
-  const getMessage = (message) => {
-    return <FormMessage  message={message}/>
+  const getMessage = (message, variant) => {
+    return <FormMessage  message={message} variant={variant}/>
   };
 
   const getInputs = () => {
@@ -71,7 +71,7 @@ function App() {
             name={input.name} 
             id={input.name}
           />
-          {!isValidField(input.name) && getMessage(`${input.text} cannot be empty`)}
+          {!isValidField(input.name) && getMessage(`${input.text} cannot be empty`, "error")}
         </div>
       )
     })
@@ -118,7 +118,7 @@ function App() {
               {getInputs()}
             </div>
           </Form>
-          {submitStatus === 'success' && getMessage("Success! The user has been added")}
+          {submitStatus === 'success' && getMessage("Success! The user has been added", "success")}
         </div>
         <div>
           <UserList listData={usersData}/>
