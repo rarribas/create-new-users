@@ -7,8 +7,8 @@ const Form = forwardRef(({ onFormSubmit, children }, ref) => {
   const [isSaving, setIsSaving] = useState(false);
 
   const afterSubmit = (ev) => {
-    ev.preventDefault(); // Prevents default form submission behavior
-    onFormSubmit(ev);
+    ev.preventDefault();
+    onFormSubmit(); 
     setIsSaving(false);
   };
 

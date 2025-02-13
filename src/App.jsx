@@ -7,7 +7,7 @@ import { useState, useEffect, useRef } from 'react';
 function App() {
   const [usersData, setUsersData] = useState(users);
   const [submitStatus, setSubmitStatus] = useState(null);
-  const [formError, setFormError] = useState(null);
+  const [formErrors, setFormErrors] = useState([]);
   const formRef = useRef(null);
 
   const inputElements = [{
@@ -44,12 +44,9 @@ function App() {
     }
   },[submitStatus]);
 
-  const getSuccessMessage = () => {
-    return <FormMessage  message="Success! New User Added"/>
-  };
-
-  const getErrorMessage = () => {
-    return <FormMessage  message={formError}/>
+  const isValidField = (inputName) => {
+    if(formErrors.length === 0) return true;
+    return !formErrors.includes(inputName);
   };
 
   const getEmptyValues = (formElements) => {
@@ -59,6 +56,10 @@ function App() {
     return formElementsArray.filter((element) => element.name && element.value.trim() === '')
       .map((element) => element.name);
   }
+
+  const getMessage = (message) => {
+    return <FormMessage  message={message}/>
+  };
 
   const getInputs = () => {
     return inputElements.map((input) =>{ 
@@ -70,6 +71,7 @@ function App() {
             name={input.name} 
             id={input.name}
           />
+          {!isValidField(input.name) && getMessage(`${input.text} cannot be empty`)}
         </div>
       )
     })
@@ -82,7 +84,7 @@ function App() {
     const emptyElements = getEmptyValues(ev.target.elements); 
 
     if(emptyElements.length > 0){
-      setFormError(`Elements ${emptyElements.join(', ')} cannot be empty`);
+      setFormErrors(emptyElements);
       setSubmitStatus("error")
       return;
     } 
@@ -100,7 +102,7 @@ function App() {
       userItem
     ])
 
-    setFormError(null);
+    setFormErrors([]);
     setSubmitStatus("success");
   };
 
@@ -116,8 +118,7 @@ function App() {
               {getInputs()}
             </div>
           </Form>
-          {submitStatus === 'success' && getSuccessMessage()}
-          {submitStatus === 'error' && getErrorMessage()}
+          {submitStatus === 'success' && getMessage("Success! The user has been added")}
         </div>
         <div>
           <UserList listData={usersData}/>
