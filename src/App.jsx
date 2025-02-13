@@ -1,6 +1,5 @@
 import './App.css'
 import Form from './components/Form';
-import Input from './components/Input';
 import UserList from './components/List';
 import FormMessage from './components/FormMessage';
 import {users} from './data/users';
@@ -56,6 +55,21 @@ function App() {
       .map((element) => element.name);
   }
 
+  const getInputs = () => {
+    return inputElements.map((input) =>{ 
+      return (
+        <div className="form-control" key={`input_${input.name}`}>
+          <label htmlFor={input.name}>{input.text}:</label>
+          <input 
+            type={input.type} 
+            name={input.name} 
+            id={input.name}
+          />
+        </div>
+      )
+    })
+  }
+
   const onFormSubmit = (ev) => {
     ev.preventDefault();
     ev.stopPropagation();
@@ -94,9 +108,7 @@ function App() {
         <div>
           <Form onFormSubmit={onFormSubmit}>
             <div>
-              {inputElements.map((input) =>{
-                return <Input  key={input.name} text={input.text} name={input.name} type={input.type} inputValue=""/>
-              })}
+              {getInputs()}
             </div>
           </Form>
           {submitStatus === 'success' && getSuccessMessage()}
