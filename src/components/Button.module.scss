@@ -12,4 +12,8 @@
   &:hover{
     background-color: #2B9EAF;
   }
+
+  &[data-variant="danger"]{
+    background: #DC3545;
+  }
 }

@@ -4,6 +4,7 @@ import UserList from './components/List';
 import FormMessage from './components/FormMessage';
 import {users} from './data/users';
 import { useState, useEffect, useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 function App() {
   const [usersData, setUsersData] = useState(users);
   const [submitStatus, setSubmitStatus] = useState(null);
@@ -90,6 +91,7 @@ function App() {
     } 
 
     const userItem = {
+      id: uuidv4(),
       name: ev.target.elements.name.value,
       job: ev.target.elements.job.value,
       country: ev.target.elements.country.value,
@@ -121,7 +123,7 @@ function App() {
           {submitStatus === 'success' && getMessage("Success! The user has been added", "success")}
         </div>
         <div>
-          <UserList listData={usersData}/>
+          <UserList listData={usersData} setUsersData={setUsersData}/>
         </div>  
       </section>
       
