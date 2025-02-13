@@ -1,29 +1,32 @@
+import { useState, forwardRef } from "react";
 import Button from "./Button";
 import styles from "./Form.module.scss";
-import { useState } from 'react';
 
 // eslint-disable-next-line react/prop-types
-export default function Form({onFormSubmit, children}){
+const Form = forwardRef(({ onFormSubmit, children }, ref) => {
   const [isSaving, setIsSaving] = useState(false);
 
-  const afterSubmit = (ev) => {    
+  const afterSubmit = (ev) => {
+    ev.preventDefault(); // Prevents default form submission behavior
     onFormSubmit(ev);
     setIsSaving(false);
   };
 
   return (
-    <form className={styles['form']} onSubmit={afterSubmit}>
+    <form ref={ref} className={styles.form} onSubmit={afterSubmit}>
+      <div>{children}</div>
       <div>
-        {children}
-      </div>
-      <div>
-        <Button 
-          text="Submit" 
+        <Button
+          text="Submit"
           type="submit"
-          disabled={isSaving} 
+          disabled={isSaving}
           onClick={() => setIsSaving(true)}
         />
       </div>
     </form>
-  )
-};
+  );
+});
+
+Form.displayName = 'Form';
+
+export default Form;

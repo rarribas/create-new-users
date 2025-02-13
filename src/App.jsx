@@ -8,14 +8,7 @@ function App() {
   const [usersData, setUsersData] = useState(users);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [formError, setFormError] = useState(null);
-
-  useEffect(() => {
-    if(submitStatus === "success"){
-      console.log("HERE???");
-      const timer = setTimeout(() => setSubmitStatus(null), 5000);
-      return () => clearTimeout(timer);
-    }
-  },[submitStatus]);
+  const formRef = useRef(null);
 
   const inputElements = [{
     name: "name",
@@ -39,6 +32,18 @@ function App() {
     text: "Net Worth",
   }];
   
+
+  useEffect(() => {
+    if(submitStatus === "success"){
+      if(formRef.current){
+        formRef.current.reset();
+      }
+      
+      const timer = setTimeout(() => setSubmitStatus(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  },[submitStatus]);
+
   const getSuccessMessage = () => {
     return <FormMessage  message="Success! New User Added"/>
   };
@@ -106,7 +111,7 @@ function App() {
       </header>
       <section>
         <div>
-          <Form onFormSubmit={onFormSubmit}>
+          <Form  ref={formRef} onFormSubmit={onFormSubmit}>
             <div>
               {getInputs()}
             </div>
