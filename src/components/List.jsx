@@ -14,7 +14,7 @@ export default function List({listData, setUsersData}){
       return <li key={listItem.id}>
         <User user={listItem}/>
         <Button
-          text={`Delete ${listItem.name}`}
+          text={`Delete User`}
           variant='danger'
           type="button"
           onButtonClick={() => deleteListItem(listItem)}
