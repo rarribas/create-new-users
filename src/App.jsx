@@ -11,6 +11,8 @@ function App() {
   const [formErrors, setFormErrors] = useState([]);
   const formRef = useRef(null);
 
+  // TODO: Refactor, move this to a different file
+
   const inputElements = [{
     name: "name",
     type: "text",
@@ -50,6 +52,9 @@ function App() {
     return !formErrors.includes(inputName);
   };
 
+  // TODO: This file is getting too big, we could move this to helpers
+  // Maybe create hooks??
+
   const getEmptyValues = (formElements) => {
     
     const formElementsArray = Array.from(formElements); // Convert HTMLFormControlsCollection to an array
@@ -80,7 +85,6 @@ function App() {
 
   const onFormSubmit = (ev) => {
     ev.preventDefault();
-    ev.stopPropagation();
 
     const emptyElements = getEmptyValues(ev.target.elements); 
 
@@ -90,6 +94,8 @@ function App() {
       return;
     } 
 
+    // Note: I could reset the form straight away here with ev
+    // ev.form.resetForm();
     const userItem = {
       id: uuidv4(),
       name: ev.target.elements.name.value,
@@ -115,7 +121,7 @@ function App() {
       </header>
       <section>
         <div>
-          <Form  ref={formRef} onFormSubmit={onFormSubmit}>
+          <Form ref={formRef} onFormSubmit={onFormSubmit}>
             <div>
               {getInputs()}
             </div>
