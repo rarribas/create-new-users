@@ -67,6 +67,7 @@ function App() {
     return <FormMessage  message={message} variant={variant}/>
   };
 
+  // TODO: hook inputs to states for handling errors on type?
   const getInputs = () => {
     return inputElements.map((input) =>{ 
       return (
